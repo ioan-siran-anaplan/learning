@@ -21,10 +21,24 @@ function firstExercise() {
      *  b) define a function that returns the factorial of the parameter it's given and display the result on the page (not using alert/console.log), see below
      *  if the input is invalid show a proper message 'Invalid number'
     ***/
+    function checkValid(a) {
+        return (!isNaN(a)) && (a > 0)
+    }
+
+    function factorial(a) {
+        let rezultat = 1;
+        for (let i = 1; i <= a; i++) {
+            rezultat = i * rezultat;
+        }
+        a = rezultat;
+        return a;
+    }
 
 
 
-    resultContainer.innerHTML = '';//This is how you show the result (what is after the equal will be displayed in the page)
+    const isValid = checkValid(val1) && checkValid(val2);
+    const isFactorial = factorial(val1) + factorial(val2);
+    resultContainer.innerHTML = isValid ? isFactorial : 'invali number';//This is how you show the result (what is after the equal will be displayed in the page)
 }
 
 function secondExercise() {
@@ -36,13 +50,27 @@ function secondExercise() {
      *  this function should return the value the function it's given only if both the numbers are even, otherwise, return undefined
      *  b) define 3 functions:
      *      1) take in a number parameter and square it
-     *      2) take in a parameters and return the square root
-     *      3) takes in a parameter and console logs it returning nothing
+     *      2) take in a parameter and return the square root
+     *      3) takes in a parameter and console logs and returning nothing
      *  display the added value of calling the function 3 times each with the different function passed as the 3rd parameter
      *  Acceptance criteria: program runs without throwing errors and proper result is displayed
      ***/
-
-    resultContainer.innerHTML = '';
+    function check(number1, number2, functie) {
+        if (number1 % 2 == 0 && number2 % 2 == 0)
+            return functie(number1);
+        else
+            return undefined;
+    }
+    function square(a){
+        return a*a;
+    }
+    function radical(a){
+        return Math.sqrt(a);
+    }
+    function afisare(a){
+        alert(a);
+    }
+    resultContainer.innerHTML = (check(val1, val2, square)??0)+(check(val1,val2,radical)??0)+(check(val1,val2,afisare)??0);
 
 }
 
