@@ -11,6 +11,10 @@
 const field1 = document.querySelector('#num1');
 const field2 = document.querySelector('#num2');
 const resultContainer = document.querySelector('#resultParagraph');
+function checkValid(a) {
+    return (!isNaN(a)) && (a > 0)
+}
+
 
 function firstExercise() {
     const val1 = field1.value; //  here I assign val1 the value of the first field at the time this function is called - these two are only accessible in this function
@@ -21,9 +25,6 @@ function firstExercise() {
      *  b) define a function that returns the factorial of the parameter it's given and display the result on the page (not using alert/console.log), see below
      *  if the input is invalid show a proper message 'Invalid number'
     ***/
-    function checkValid(a) {
-        return (!isNaN(a)) && (a > 0)
-    }
 
     function factorial(a) {
         let rezultat = 1;
@@ -61,16 +62,16 @@ function secondExercise() {
         else
             return undefined;
     }
-    function square(a){
-        return a*a;
+    function square(a) {
+        return a * a;
     }
-    function radical(a){
+    function radical(a) {
         return Math.sqrt(a);
     }
-    function afisare(a){
+    function afisare(a) {
         alert(a);
     }
-    resultContainer.innerHTML = (check(val1, val2, square)??0)+(check(val1,val2,radical)??0)+(check(val1,val2,afisare)??0);
+    resultContainer.innerHTML = (check(val1, val2, square) ?? 0) + (check(val1, val2, radical) ?? 0) + (check(val1, val2, afisare) ?? 0);
 
 }
 
@@ -84,9 +85,42 @@ function thirdExercise() {
      *  use the function previously to validate the input
      *  Use this function to display the biggest value from the two
      ***/
+    function compare(number11, number12) {
+        if (checkValid(number11) && checkValid(number12)) {
+            if (number11 == number12)
+                return 0;
+            else {
+                if (number11 > number12)
+                    return 1;
+                else
+                    return -1;
+            }
+        }
+    }
+    /*let comparatie = compare(val1, val2);
+    let a = (comparatie == 0) ? val1 :
+        ((comparatie == 1) ? val1 :
+            val2);
+    alert(a);
+*/
+    let a=compare(val1,val2); let result;
+    switch (a) {
+        case 0:
+            result = val1;   
+            break;
+        case 1:
+            result=val1;
+            break;
+        case -1:
+            result=val2;
+            break;
+        default:
+            result=undefined;
+            break;
+    }
 
-    resultContainer.innerHTML = '';
 
+    resultContainer.innerHTML = result;
 }
 
 function fourthExercise() {
@@ -96,9 +130,17 @@ function fourthExercise() {
      *  Create a function that strips a string of non-numeric characters and converts the result into a whole number.
      *  Use this function to extract the number from the first field
      ***/
-
-
-    resultContainer.innerHTML = '';
+    function findNum(sir)
+    {
+        let num=0;
+        for(let i=0;i<sir.length;i++)
+        {
+            if(!isNaN(sir[i]))
+                num=+sir[i]+num*10;
+        }
+        return num;}
+    
+    resultContainer.innerHTML = findNum(val1);;
 
 }
 
@@ -111,10 +153,16 @@ function fifthExercise() {
      *  Use the function written previously to validate the input
      *  Program should show the repeating digits as well
      ***/
+    function sortare(a = '')
+    {
+        if(checkValid(a))
+            return a.split('').sort().reverse();
+        else
+            return "invalid";
+    }
 
 
-
-    resultContainer.innerHTML = '';
+    resultContainer.innerHTML = sortare(val1);
 }
 function sixthExercise() {
 
@@ -123,10 +171,30 @@ function sixthExercise() {
      *  write a function that returns the next 20 leap years (an bisect) as a string separated by a ', ' after each year
      *  display the value returned
      ***/
+    function years()
+    {
+        let result="";
+        let today=new Date();
+        let yyyy = today.getFullYear();
+        today=yyyy;
+        let i=0;
+        while(i<20)
+        {
+            if (today%4==0)
+            {
+                result=`${result}, ${today}`;
+                i++;
+                today++;
+            }
+            else
+                today++;
+        }
+        return result;
+    }
+    
 
 
-
-    resultContainer.innerHTML = '';
+    resultContainer.innerHTML = years();
 }
 
 /***
